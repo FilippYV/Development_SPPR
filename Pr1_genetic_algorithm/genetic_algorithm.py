@@ -63,16 +63,16 @@ def sort_by_long(mass):
                 minimum = [i, mass[i][1]]
         new_mass.append(mass[minimum[0]])
         mass.pop(minimum[0])
-    print('Отсортированная по лучшим особям популяция')
-    for i in new_mass:
-        print(i)
-    print()
+    # print('Отсортированная по лучшим особям популяция')
+    # for i in new_mass:
+    #     print(i)
+    # print()
     return new_mass
 
 
 def crossing(mass, count_s, all_routes):
     number_of_descendants = len(mass) // 3
-    print('количество потомков -', number_of_descendants)
+    # print('количество потомков -', number_of_descendants)
     massive = []
     element_to_split = []
     while len(element_to_split) != number_of_descendants:
@@ -81,10 +81,10 @@ def crossing(mass, count_s, all_routes):
             element_to_split.append(parent_for_crossing)
     for i in range(len(element_to_split)):
         massive.append(random.randint(1, len(mass[0][0]) - 2))
-    print(element_to_split, massive)
+    # print(element_to_split, massive)
     mass_gen = []
     # count = len(element_to_split) // 2
-    print(len(element_to_split) // 2)
+    # print(len(element_to_split) // 2)
     for index in range(0, len(element_to_split) // 2):
         inx_start = index * 2
         for i in range(inx_start, inx_start + 2):
@@ -96,7 +96,7 @@ def crossing(mass, count_s, all_routes):
                 if mass[element_to_split[inx_start + 1]][0][j] not in new_elem:
                     new_elem.append(mass[element_to_split[inx_start + 1]][0][j])
 
-            print(element_to_split[inx_start])
+            # print(element_to_split[inx_start])
             for j in range(0, len(mass[0][0])):
                 if mass[element_to_split[inx_start]][0][j] not in new_elem:
                     new_elem.append(mass[element_to_split[inx_start]][0][j])
@@ -108,14 +108,14 @@ def crossing(mass, count_s, all_routes):
                 new_elem = mutation(new_elem)
             new_elem.append(new_elem[0])
             mass.append(new_elem)
-            print(new_elem)
+            # print(new_elem)
 
-    print()
+    # print()
     for i in range(len(mass)):
         if i not in element_to_split:
             mass_gen.append(mass[i])
-    for i in mass_gen:
-        print(i)
+    # for i in mass_gen:
+    #     print(i)
     mass_gen = sort_by_long(mass_gen)
     return count_len(mass_gen, all_routes)
 
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     all_routes = generating_all_paths(count_cities)
     new_generation = generate_start_routes(all_routes, count_cities)
     iteration = 0
-    minimum =[[], 1000000]
+    minimum = [[], 1000000]
     while iteration < 15:
         new_generation = crossing(new_generation, count_cities, all_routes)
         print('Итерация -', iteration)

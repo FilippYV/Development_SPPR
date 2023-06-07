@@ -61,6 +61,8 @@ def generating_all_paths(count):
     for i in range(count - 1):  # генераця всех путей
         for j in range(i, count):
             mass_all_routes.append([i, j, random.randint(20, 50)])
+    mass_all_routes = [[0, 1, 52], [0, 2, 73], [0, 3, 87], [0, 4, 66], [0, 5, 89], [1, 2, 60], [1, 3, 59], [1, 4, 54],
+                       [1, 5, 90], [2, 3, 100], [2, 4, 79], [2, 5, 79], [3, 4, 58], [3, 5, 93], [4, 5, 69]]
     print('Таблица всех путей')
     for i in mass_all_routes:
         print(i)
@@ -98,9 +100,9 @@ def crossing(mass, count_s, all_routes):
     massive_2 = []
     for i in range(len(element_to_split)):
         massive_2.append(random.randint(1, len(mass[0][0]) - 2))
-    print(element_to_split, massive)
+    # print(element_to_split, massive)
     # print(element_to_split)
-    print("||||||")
+    # print("||||||")
     mass_gen = []
     # count = len(element_to_split) // 2
     # print(len(element_to_split) // 2)
@@ -149,8 +151,8 @@ def crossing(mass, count_s, all_routes):
             element = mutation(element)
         element.append(element[0])
         mass.append(element)
-    mass_gen = sort_by_long(mass)
-    return count_len(mass_gen, all_routes)
+    # mass_gen = sort_by_long(mass)
+    return count_len(mass, all_routes)
 
 
 if __name__ == '__main__':
