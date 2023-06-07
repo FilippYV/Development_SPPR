@@ -65,33 +65,6 @@ def generating_all_paths(count):
     for i in mass_all_routes:
         print(i)
     print()
-    mass_all_routes = [[0, 0, 24],
-        [0, 1, 22],
-        [0, 2, 43],
-        [0, 3, 31],
-        [0, 4, 34],
-        [0, 5, 41],
-        [0, 6, 43],
-        [1, 1, 46],
-        [1, 2, 37],
-        [1, 3, 24],
-        [1, 4, 45],
-        [1, 5, 50],
-        [1, 6, 35],
-        [2, 2, 29],
-        [2, 3, 24],
-        [2, 4, 32],
-        [2, 5, 27],
-        [2, 6, 38],
-        [3, 3, 26],
-        [3, 4, 22],
-        [3, 5, 43],
-        [3, 6, 33],
-        [4, 4, 42],
-        [4, 5, 24],
-        [4, 6, 48],
-        [5, 5, 24],
-        [5, 6, 48]]
     return mass_all_routes
 
 
@@ -138,16 +111,13 @@ def crossing(mass, count_s, all_routes):
             if mass[i[0]][0][j] not in element:
                 element.append(mass[i[0]][0][j])
 
-
         for j in range(massive[ii], len(mass[0][0])):
             if mass[i[1]][0][j] not in element:
                 element.append(mass[i[1]][0][j])
 
-
         for j in range(0, len(mass[0][0])):
             if mass[i[0]][0][j] not in element:
                 element.append(mass[i[0]][0][j])
-
 
         for j in range(0, len(mass[0][0])):
             if mass[i[1]][0][j] not in element:
@@ -179,17 +149,12 @@ def crossing(mass, count_s, all_routes):
             element = mutation(element)
         element.append(element[0])
         mass.append(element)
-        # print(element)
-    # print("dddd")
-    # for i in mass:
-    #     print(i)
-    # print("ddddd")
     mass_gen = sort_by_long(mass)
     return count_len(mass_gen, all_routes)
 
 
 if __name__ == '__main__':
-    count_cities = 7
+    count_cities = 6
     all_routes = generating_all_paths(count_cities)
     new_generation = generate_start_routes(all_routes, count_cities)
     iteration = 0
