@@ -79,82 +79,6 @@ def mutation(mass, count_cities):
             return mass
 
 
-# def crossing(mass, count_s, all_routes):
-#     if len(mass) // 2 == 0:
-#         number_of_descendants = len(mass) // 2
-#     else:
-#         number_of_descendants = len(mass) // 2 - 1
-#     print('количество потомков -', number_of_descendants)
-#
-#     massive = []
-#     element_to_split = []
-#     while len(element_to_split) != number_of_descendants // 2:
-#         pod = []
-#         while len(pod) != 2:
-#             parent_for_crossing = random.randint(0, len(mass) - 1)
-#             if parent_for_crossing not in pod:
-#                 pod.append(parent_for_crossing)
-#         element_to_split.append(pod)
-#     for i in range(len(element_to_split)):
-#         massive.append(random.randint(1, len(mass[0][0]) - 2))
-#     massive_2 = []
-#     for i in range(len(element_to_split)):
-#         massive_2.append(random.randint(1, len(mass[0][0]) - 2))
-#     # print(element_to_split, massive)
-#     # print(element_to_split)
-#     # print("||||||")
-#     mass_gen = []
-#     # count = len(element_to_split) // 2
-#     # print(len(element_to_split) // 2)
-#     for ii, i in enumerate(element_to_split):
-#         element = []
-#         # print(mass[i[0]][0])
-#         for j in range(0, massive[ii]):
-#             if mass[i[0]][0][j] not in element:
-#                 element.append(mass[i[0]][0][j])
-#
-#         for j in range(massive[ii], len(mass[0][0])):
-#             if mass[i[1]][0][j] not in element:
-#                 element.append(mass[i[1]][0][j])
-#
-#         for j in range(0, len(mass[0][0])):
-#             if mass[i[0]][0][j] not in element:
-#                 element.append(mass[i[0]][0][j])
-#
-#         for j in range(0, len(mass[0][0])):
-#             if mass[i[1]][0][j] not in element:
-#                 element.append(mass[i[1]][0][j])
-#
-#         if random.randint(0, 100) < 10:
-#             element = mutation(element)
-#         element.append(element[0])
-#         mass.append(element)
-#         element = []
-#         # print(mass[i[0]][0])
-#         for j in range(0, massive_2[ii]):
-#             if mass[i[0]][0][j] not in element:
-#                 element.append(mass[i[0]][0][j])
-#
-#         for j in range(massive_2[ii], len(mass[0][0])):
-#             if mass[i[1]][0][j] not in element:
-#                 element.append(mass[i[1]][0][j])
-#
-#         for j in range(0, len(mass[0][0])):
-#             if mass[i[0]][0][j] not in element:
-#                 element.append(mass[i[0]][0][j])
-#
-#         for j in range(0, len(mass[0][0])):
-#             if mass[i[1]][0][j] not in element:
-#                 element.append(mass[i[1]][0][j])
-#
-#         if random.randint(0, 100) < 10:
-#             element = mutation(element)
-#         element.append(element[0])
-#         mass.append(element)
-#     # mass_gen = sort_by_long(mass)
-#     return count_len(mass, all_routes)
-
-
 def mutation_element(element, count_cities):
     switch = True
     # print(element)
@@ -181,16 +105,10 @@ def mutation_element(element, count_cities):
                 second_element_to_mutation -= 1
         else:
             switch = False
-    # print(elements, first_element_to_mutation, second_element_to_mutation)
     elements[first_element_to_mutation], elements[second_element_to_mutation] = \
         elements[second_element_to_mutation], elements[first_element_to_mutation]
-    # elements.append(elements[0])
-    # print(elements, first_element_to_mutation, second_element_to_mutation)
     elements.append(elements[0])
-    # print(elements)
-    # print('____________')
     return elements
-    # exit(123)
 
 
 def leave_the_giant_enough(massive):
@@ -198,6 +116,7 @@ def leave_the_giant_enough(massive):
     for i in range(6):
         new_massive.append(massive[i])
     return new_massive
+
 
 if __name__ == '__main__':
     count_cities = 6
