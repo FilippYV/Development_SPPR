@@ -1,6 +1,5 @@
 import itertools
 import random
-import math
 
 
 def sort_by_long(mass):
