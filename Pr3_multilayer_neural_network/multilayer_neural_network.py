@@ -1,6 +1,5 @@
 import math
 import random
-import decimal
 
 
 def get_start_weight():  # генерируем веса для 15 входных нейронов
@@ -8,7 +7,7 @@ def get_start_weight():  # генерируем веса для 15 входны�
     for j in range(15):
         weight = []
         for i in range(5):
-            weight.append(round(random.uniform(0, 0.01), 4))
+            weight.append(round(random.uniform(-0.5, 0.5), 4))
         input_neurons_weight.append(weight)
     print('Начльные веса входных нейронов')
     for i in input_neurons_weight:
@@ -22,7 +21,7 @@ def get_weight_weight():  # генерируем веса для 15 входны
     for j in range(5):
         weight = []
         for i in range(10):
-            weight.append(round(random.uniform(0, 0.01), 4))
+            weight.append(round(random.uniform(-0.5, 0.5), 4))
         hidden_neurons_weight.append(weight)
     print('Начльные веса скрытых нейронов')
     for i in hidden_neurons_weight:
@@ -119,21 +118,32 @@ def direct_distribution(data, y, input_neurons_weight, hidden_neurons_weight, ne
 
         for i, ii in enumerate(y[0]):
             for j, jj in enumerate(hidden_neurons_weight):
-                values_on_output_layer[i] += dd[j] * hidden_neurons_weight[j][i]
+                values_on_output_layer[i] += values_on_hidden_layer[j] * hidden_neurons_weight[j][i]
         values_on_output_layer = [singmoid(i) for i in values_on_output_layer]
         print(f'Значения на выходном слое - {values_on_output_layer}')
 
-        # обратное распрастранение ошибки
-        weighted_amount = [0] * len(hidden_neurons_weight) # вычисляем взвешенную сумму
-        for i, ii in enumerate(weighted_amount):
-            for j, jj in enumerate(hidden_neurons_weight[0]):
-                weighted_amount[i] += hidden_neurons_weight[i][j] * values_on_output_layer[j]
-        print(f'взвешенная сумма {weighted_amount}' )
 
-        for i, ii in enumerate(weighted_amount):
-            weighted_amount[i] *= (values_on_hidden_layer[i] * (1 - values_on_hidden_layer[i]))
-        print(f'Локальный градиент для нейронов выходного слоя {weighted_amount}')
-        d_for_hidden_layer = [0] * len(hidden_neurons_weight)
+
+        # обратное распрастранение ошибки
+        answer_error = [y[i][0] - values_on_output_layer[i] for i,ii in enumerate(values_on_output_layer)] # ошибки сети
+        print('Ошибки сети', answer_error)
+
+        hidden_layer_error = [0] * len(values_on_hidden_layer)
+        for a, aa in enumerate(answer_error):
+            # for k, kk  in enumerate(answer_error):
+                for i,ii in enumerate(hidden_neurons_weight[0]):
+                    for j, jj in enumerate(hidden_neurons_weight):
+                        hidden_layer_error[j] += answer_error[a] * hidden_neurons_weight[j][i]
+        print('веса для оновления на скрытом слое', hidden_layer_error)
+
+        exit(123)
+        # massive_eror = []*len(values_on_output_layer)
+        # for i,ii in enumerate(y):
+
+        # for i, ii in enumerate(weighted_amount):
+        #     weighted_amount[i] *= (values_on_hidden_layer[i] * (1 - values_on_hidden_layer[i]))
+        # print(f'Локальный градиент для нейронов выходного слоя {weighted_amount}')
+        # d_for_hidden_layer = [0] * len(hidden_neurons_weight)
         # for i, ii in enumerate(hidden_neurons_weight):
         #     d_for_hidden_layer[i] +=
         # mse = count_mse(values_on_output_layer[m], y[d][m])  # квадрат ошибки
@@ -141,27 +151,27 @@ def direct_distribution(data, y, input_neurons_weight, hidden_neurons_weight, ne
         # dL_by_sigm = 2 * (values_on_output_layer[m] - y[d][m])  # производная квадрата ошибки
 
 
-        d_for_hidden_layer = [0] * len(hidden_neurons_weight)
-        for i, ii in enumerate(d_for_hidden_layer):
-            d_for_hidden_layer[i] += weighted_amount[i] * values_on_hidden_layer[i]
-
+        # d_for_hidden_layer = [0] * len(hidden_neurons_weight)
+        # for i, ii in enumerate(d_for_hidden_layer):
+        #     d_for_hidden_layer[i] += weighted_amount[i] * values_on_hidden_layer[i]
+        #
 
 
 
         # print('dL_by_sigm -', dL_by_sigm)
         # d_for_hidden_layer = [0] * len(hidden_neurons_weight)
-        d_for_input_layer = [0] * len(input_neurons_weight)
-        # dL_by_sigm * (values_on_output_layer[i] * (1 - values_on_output_layer[i]))
-        for i, ii in enumerate(d_for_hidden_layer):  # считаем производные для скрытого словая
-            d_for_hidden_layer[i] = dL_by_sigm * (values_on_output_layer[i] * (1 - values_on_output_layer[i]))
-            # print(d_for_hidden_layer[i])
-            for j, jj in enumerate(input_neurons_weight):  # считаем производные для скрытого словая
-                d_for_input_layer[j] = d_for_hidden_layer[i] * (data[m][j])
-                # print(d_for_hidden_layer[i])
-        for i, ii in enumerate(input_neurons_weight):
-            input_neurons_weight[i] += d_for_input_layer[i]
-        for i, ii in enumerate(hidden_neurons_weight):
-            input_neurons_weight[i] += d_for_hidden_layer[i]
+        # d_for_input_layer = [0] * len(input_neurons_weight)
+        # # dL_by_sigm * (values_on_output_layer[i] * (1 - values_on_output_layer[i]))
+        # for i, ii in enumerate(d_for_hidden_layer):  # считаем производные для скрытого словая
+        #     d_for_hidden_layer[i] = dL_by_sigm * (values_on_output_layer[i] * (1 - values_on_output_layer[i]))
+        #     # print(d_for_hidden_layer[i])
+        #     for j, jj in enumerate(input_neurons_weight):  # считаем производные для скрытого словая
+        #         d_for_input_layer[j] = d_for_hidden_layer[i] * (data[m][j])
+        #         # print(d_for_hidden_layer[i])
+        # for i, ii in enumerate(input_neurons_weight):
+        #     input_neurons_weight[i] += d_for_input_layer[i]
+        # for i, ii in enumerate(hidden_neurons_weight):
+        #     input_neurons_weight[i] += d_for_hidden_layer[i]
 
         # reverse_propagation(values_on_output_layer, values_on_hidden_layer, data, y, input_neurons_weight, hidden_neurons_weight)
 
