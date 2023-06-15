@@ -154,6 +154,9 @@ def crossing(mass, count_s, all_routes):
     return count_len(mass, all_routes)
 
 
+
+
+
 if __name__ == '__main__':
     count_cities = 6
     all_routes = generating_all_paths(count_cities)
