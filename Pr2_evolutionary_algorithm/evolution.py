@@ -51,7 +51,6 @@ def generate_start_routes(routes, cities):
     print('Начальная популяция!')
     print(start_routers)
     print()
-    # start_routers =
     return count_len(start_routers, routes)
 
 

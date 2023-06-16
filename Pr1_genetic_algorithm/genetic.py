@@ -99,12 +99,6 @@ def crossing(mass, count_s, all_routes):
     massive_2 = []
     for i in range(len(element_to_split)):
         massive_2.append(random.randint(1, len(mass[0][0]) - 2))
-    # print(element_to_split, massive)
-    # print(element_to_split)
-    # print("||||||")
-    mass_gen = []
-    # count = len(element_to_split) // 2
-    # print(len(element_to_split) // 2)
     for ii, i in enumerate(element_to_split):
         element = []
         # print(mass[i[0]][0])
@@ -152,9 +146,6 @@ def crossing(mass, count_s, all_routes):
         mass.append(element)
     # mass_gen = sort_by_long(mass)
     return count_len(mass, all_routes)
-
-
-
 
 
 if __name__ == '__main__':

@@ -43,11 +43,11 @@ def get_second_hidden_weight():  # генерируем веса для 2 скр
 
 def get_data_and_y():
     data = [[1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-            [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+            [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
             [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-            [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+            [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0],
             [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
-            [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]]
+            [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0]]
 
     y = [[0], [1], [0], [1], [0], [1]]
     return data, y
@@ -90,7 +90,7 @@ class Neural:
         epoch = 0
         while epoch != self.iteration:
             self.direct_distribution()
-            if epoch % 1000 == 0:
+            if epoch % 10 == 0:
                 print()
                 print(f'Эпоха - {epoch}')
                 print(f'Входной слой веса {self.input_neurons_weight}')
@@ -175,8 +175,18 @@ if __name__ == '__main__':
                                  learning_step=0.1, iteration=500)
 
     multi_layered_thing.train()
+
     new_data = [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1]
     multi_layered_thing.predict(new_data)
 
     new_data = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]
+    multi_layered_thing.predict(new_data)
+
+    new_data = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0]
+    multi_layered_thing.predict(new_data)
+
+    new_data = [0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1]
+    multi_layered_thing.predict(new_data)
+
+    new_data = [0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0]
     multi_layered_thing.predict(new_data)
