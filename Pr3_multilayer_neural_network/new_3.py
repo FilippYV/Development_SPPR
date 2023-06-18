@@ -9,7 +9,7 @@ def convert_data(i):
     for i, ii in enumerate(cv2.imread(f"../static/photo/{i}.png", 0)):
         for j, jj in enumerate(ii):
             if jj == 255:
-                data.append(0)
+                data.append(0.01)
             else:
                 data.append(1)
     massive.append(data)
@@ -39,7 +39,7 @@ def get_data_and_y(massive):
         for i, ii in enumerate(cv2.imread(f"../static/photo/{k}.png", 0)):
             for j, jj in enumerate(ii):
                 if jj >= 128:
-                    data.append(0)
+                    data.append(0.01)
                 else:
                     data.append(1)
         X_train.append(data)
@@ -66,7 +66,7 @@ def leaky_relu(x):
 
 def grad_leaky_relu(x):
     if x < 0:
-        return 0.01
+        return 0.0001
     elif x >= 0:
         return 1
 
@@ -105,10 +105,10 @@ class Neural:
             epoch += 1
 
     def direct_distribution(self):
-        values_on_input_first_layer = [0] * len(self.input_neurons_weight[0])
-        values_on_input_second_layer = [0] * len(self.first_hidden_neurons_weight[0])
-        values_on_out_layer = [0] * len(self.second_hidden_neurons_weight[0])
         for d, dd in enumerate(self.data):  # проход по данным
+            values_on_input_first_layer = [0] * len(self.input_neurons_weight[0])
+            values_on_input_second_layer = [0] * len(self.first_hidden_neurons_weight[0])
+            values_on_out_layer = [0] * len(self.second_hidden_neurons_weight[0])
             for i, ii in enumerate(self.input_neurons_weight[0]):
                 for j, jj in enumerate(self.input_neurons_weight):
                     values_on_input_first_layer[i] += \
@@ -204,17 +204,17 @@ class Neural:
 
 
 if __name__ == '__main__':
-    input_neurons_weight = get_weight(15, 24, 0., 0.5)
+    input_neurons_weight = get_weight(90, 24, 0., 0.5)
     first_hidden_neurons_weight = get_weight(24, 12, 0., 0.5)
     second_hidden_neurons_weight = get_weight(12, 5, 0., 0.5)
     data, y = get_data_and_y([1, 2, 3, 4, 5])
 
     multi_layered_thing = Neural(data, y, input_neurons_weight, first_hidden_neurons_weight,
                                  second_hidden_neurons_weight,
-                                 learning_step=0.1, iteration=4000)
+                                 learning_step=0.1, iteration=1000)
 
     multi_layered_thing.train()
 
     multi_layered_thing.predict(convert_data(1))
-    multi_layered_thing.predict(convert_data(3))
-    multi_layered_thing.predict(convert_data(5))
+    multi_layered_thing.predict(convert_data(12))
+    multi_layered_thing.predict(convert_data(6))

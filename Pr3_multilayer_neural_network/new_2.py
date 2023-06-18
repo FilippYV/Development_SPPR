@@ -100,9 +100,9 @@ class Neural:
             epoch += 1
 
     def direct_distribution(self):
-        values_on_input_second_layer = [0] * len(self.second_hidden_neurons_weight)
-        values_on_out_layer = 0
         for d, dd in enumerate(self.data):  # проход по данным
+            values_on_input_second_layer = [0] * len(self.second_hidden_neurons_weight)
+            values_on_out_layer = 0
             for i, ii in enumerate(self.first_hidden_neurons_weight):
                 for j, jj in enumerate(self.first_hidden_neurons_weight):
                     values_on_input_second_layer[j] += dd[j] * self.first_hidden_neurons_weight[j][i]
@@ -177,16 +177,18 @@ if __name__ == '__main__':
     multi_layered_thing.train()
 
     new_data = [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1]
+    print('0')
     multi_layered_thing.predict(new_data)
 
+    print('1')
     new_data = [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]
     multi_layered_thing.predict(new_data)
-
+    print('1')
     new_data = [0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0]
     multi_layered_thing.predict(new_data)
-
+    print('1')
     new_data = [0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1]
     multi_layered_thing.predict(new_data)
-
+    print('0')
     new_data = [0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0]
     multi_layered_thing.predict(new_data)

@@ -132,7 +132,7 @@ if __name__ == '__main__':
         new_generation = leave_the_giant_enough(new_generation)
         print('Итерация -', iteration)
         for i in range(len(new_generation)):
-            print(f"Елемент №{i} - {new_generation[i]}")
+            print(f"Елемент №{i + 1} - {new_generation[i]}")
         print()
         for i in range(len(new_generation)):
             if new_generation[i][1] < minimum[1]:
