@@ -13,6 +13,7 @@ for i, ii in enumerate(cv2.imread(f"../static/photo/{i}.png", 0)):
         else:
             data.append(1)
 massive.append(data)
+
 print(massive)
 
 # population = [[0],[ 2], [3], [4]]
